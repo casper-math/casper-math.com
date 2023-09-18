@@ -1,13 +1,14 @@
-<script>
+<script lang="ts">
     import casper from 'casper-math'
     import katex from 'katex'
 
-    let input = '2 * 3 + 4 * 5'
-    let output = ''
+    let input: string = '2 * 3 + 4 * 5'
+    let output: string = ''
     $: latex = katex.renderToString(input, { throwOnError: false })
 
     function go() {
-        output = katex.renderToString(casper().go(input), { throwOnError: false })
+        let result = casper().go(input)
+        output = katex.renderToString(result, { throwOnError: false })
     }
 </script>
 
