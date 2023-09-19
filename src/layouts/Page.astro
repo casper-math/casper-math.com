@@ -1,16 +1,77 @@
 ---
 import type { MarkdownLayoutProps } from 'astro'
+import GithubLogo from '../components/GithubLogo.astro'
 import Layout from './Layout.astro'
 
 type Props = MarkdownLayoutProps<{
     title: string
+    section: string
+    order: number
 }>
 
 const { frontmatter } = Astro.props
+const pages = await Astro.glob('../pages/docs/*.md')
+const sections = ['Introduction', 'Other stuff']
 ---
 
 <Layout title={frontmatter.title}>
-    <div class="max-w-screen-md mx-auto my-16 typography">
-        <slot />
+    <header class="h-full bg-gradient-to-b from-blue-700 to-blue-500">
+        <div class="max-w-screen-lg mx-auto">
+            <nav class="flex items-center justify-between pt-10">
+                <a href="/" class="flex items-center space-x-4 text-xl font-bold text-white">Casper</a>
+
+                <ul class="flex items-center space-x-6 text-lg">
+                    <li><a href="/" class="text-white hover:underline">Home</a></li>
+                    <li><a href="#" class="text-white hover:underline">Docs</a></li>
+                    <li><a href="#"><GithubLogo style="w-6 fill-white hover:opacity-75" /></a></li>
+                </ul>
+            </nav>
+
+            <div class="py-32">
+                <p class="mb-2 font-bold tracking-wide text-white uppercase opacity-80">Documentation</p>
+                <h1 class="text-5xl font-bold text-white">{frontmatter.title}</h1>
+            </div>
+        </div>
+    </header>
+
+    <div class="grid max-w-screen-lg grid-cols-4 py-16 mx-auto">
+        <aside>
+            <ul class="space-y-9">
+                {
+                    sections.map(section => (
+                        <li>
+                            <h2 class="font-bold">{section}</h2>
+                            <ul class="mt-4 space-y-4 border-l-2 border-gray-200">
+                                {pages
+                                    .filter(page => page.frontmatter.section === section)
+                                    .map(page => (
+                                        <li class="relative">
+                                            {Astro.url.pathname === page.url ? (
+                                                <a
+                                                    class="block w-full pl-4 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-blue-600 before:bg-blue-600 "
+                                                    href={page.url}
+                                                >
+                                                    {page.frontmatter.title}
+                                                </a>
+                                            ) : (
+                                                <a
+                                                    class="block w-full pl-4 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-600 before:hidden before:bg-slate-300 hover:text-slate-800 hover:before:block"
+                                                    href={page.url}
+                                                >
+                                                    {page.frontmatter.title}
+                                                </a>
+                                            )}
+                                        </li>
+                                    ))}
+                            </ul>
+                        </li>
+                    ))
+                }
+            </ul>
+        </aside>
+
+        <main class="col-span-3 typography">
+            <slot />
+        </main>
     </div>
 </Layout>

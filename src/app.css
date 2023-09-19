@@ -37,3 +37,7 @@
 .typography blockquote * {
     @apply mb-0;
 }
+
+.typography :first-child {
+    @apply mt-0;
+}
