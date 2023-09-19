@@ -41,3 +41,7 @@
 .typography :first-child {
     @apply mt-0;
 }
+
+.katex-html {
+    text-align: left;
+}

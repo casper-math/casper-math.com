@@ -1,17 +1,17 @@
 ---
 import App from '../components/App.svelte'
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="Home">
-    <div class="max-w-screen-lg mx-auto my-16">
-        <h1 class="mb-4 text-5xl font-bold">Let <span class="text-blue-600">Casper</span> do the boring work.</h1>
+    <Header
+        title="Let Casper do the boring work."
+        description="Casper is a computer algebra system that can simplify expressions and solve equations for you!"
+    />
 
-        <p class="mb-8 text-lg">
-            <strong>Casper</strong> is a computer algebra system that can simplify expressions and solve equations for
-            you!
-        </p>
+    <App client:load />
 
-        <App client:load />
-    </div>
+    <Footer />
 </Layout>
