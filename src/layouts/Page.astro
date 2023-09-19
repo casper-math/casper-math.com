@@ -9,7 +9,7 @@ type Props = MarkdownLayoutProps<{
     order: number
 }>
 
-const { frontmatter } = Astro.props
+const { frontmatter }: Props = Astro.props
 const pages = await Astro.glob('../pages/docs/*.md')
 const sections = ['Introduction', 'Other stuff']
 ---
@@ -47,7 +47,7 @@ const sections = ['Introduction', 'Other stuff']
                                     .sort((a, b) => a.frontmatter.order - b.frontmatter.order)
                                     .map(page => (
                                         <li class="relative">
-                                            {Astro.url.pathname === page.url ? (
+                                            {frontmatter.url === page.url ? (
                                                 <a
                                                     class="block w-full pl-4 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-blue-600 before:bg-blue-600 "
                                                     href={page.url}
