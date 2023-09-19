@@ -44,6 +44,7 @@ const sections = ['Introduction', 'Other stuff']
                             <ul class="mt-4 space-y-4 border-l-2 border-gray-200">
                                 {pages
                                     .filter(page => page.frontmatter.section === section)
+                                    .sort((a, b) => a.frontmatter.order - b.frontmatter.order)
                                     .map(page => (
                                         <li class="relative">
                                             {Astro.url.pathname === page.url ? (
