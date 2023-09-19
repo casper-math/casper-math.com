@@ -1,0 +1,39 @@
+.typography * {
+    @apply leading-8;
+}
+
+.typography h1 {
+    @apply mb-6 text-5xl font-bold;
+}
+
+.typography h2 {
+    @apply mt-12 mb-6 text-4xl font-bold;
+}
+
+.typography h3 {
+    @apply mt-12 mb-6 text-2xl font-bold;
+}
+
+.typography p {
+    @apply mb-6;
+}
+
+.typography ul {
+    @apply mb-6 list-disc list-inside;
+}
+
+.typography ol {
+    @apply mb-6 list-decimal list-inside;
+}
+
+.typography a {
+    @apply text-blue-600 underline hover:text-blue-800;
+}
+
+.typography blockquote {
+    @apply py-2 pl-4 mb-6 border-l-4 border-gray-300;
+}
+
+.typography blockquote * {
+    @apply mb-0;
+}
