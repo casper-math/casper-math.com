@@ -73,20 +73,22 @@
     </button>
 </div>
 
-<div class="bg-gradient-to-b min-h-screen pt-16 from-gray-200 to-white">
-    {#if preview !== '' && input !== ''}
-        <div class="flex container text-lg items-center space-x-3">
-            <p><strong>Your Input:</strong></p>
-            <div>{@html preview}</div>
-        </div>
-    {/if}
+<div class="bg-gradient-to-b space-y-24 mb-24 pt-16 from-gray-200 to-white">
+    <div>
+        {#if preview !== '' && input !== ''}
+            <div class="flex container text-lg items-center space-x-3">
+                <p><strong>Your Input:</strong></p>
+                <div>{@html preview}</div>
+            </div>
+        {/if}
 
-    {#if output !== ''}
-        <div class="flex container text-lg items-center space-x-3">
-            <p><strong>Output:</strong></p>
-            <div>{@html output}</div>
-        </div>
-    {/if}
+        {#if output !== ''}
+            <div class="flex container text-lg items-center space-x-3">
+                <p><strong>Output:</strong></p>
+                <div>{@html output}</div>
+            </div>
+        {/if}
+    </div>
 
     <div class="container mt-12">
         <h2 class="font-bold text-center mb-10 text-4xl">Try an example</h2>
@@ -119,5 +121,31 @@
                 </li>
             {/each}
         </ul>
+    </div>
+
+    <div class="container">
+        <div
+            class="bg-gradient-to-tr from-blue-600 to-blue-500 grid grid-cols-2 p-6 gap-12 rounded-md shadow-xl text-white"
+        >
+            <div class="col-span-1 p-6">
+                <h3 class=" font-bold text-3xl mb-4">Use Casper in your project</h3>
+                <p class="mb-6">Capser is an NPM package that you can use and configure to meet your needs.</p>
+                <a
+                    href="https://www.npmjs.com/package/casper-math"
+                    class="inline-block hover:shadow-xl transition hover:scale-110 px-6 py-3 bg-white text-blue-600 rounded-md shadow-md"
+                >
+                    Check it out
+                </a>
+            </div>
+            <div class="col-span-1 p-6 bg-blue-900 text-lg rounded-md shadow-md">
+                <code>
+                    <span class="text-red-300">import</span> casper <span class="text-red-300">from</span>
+                    <span class="text-blue-200">'casper-math'</span><br /><br />
+                    <span class="text-fuchsia-300">casper</span>().<span class="text-fuchsia-300">go</span>(<span
+                        class="text-blue-200">'2*x + 4*x'</span
+                    >) <span class="text-slate-400">// 6*x</span><br /><br />
+                </code>
+            </div>
+        </div>
     </div>
 </div>
