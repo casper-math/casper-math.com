@@ -4,11 +4,19 @@
 
     let input: string = '(2 + 3) / (4 * 5)'
     let preview: string = ''
+    let output: string = ''
 
     $: try {
-        let result = casper().actions([]).options({ output: 'preview' }).go(input)
-        preview = katex.renderToString(result, { throwOnError: false, displayMode: true })
+        let result = casper().options({ output: 'latex', actions: [] }).go(input)
+        preview = katex.renderToString(result, { displayMode: true })
     } catch (error) {}
+
+    function go() {
+        try {
+            let result = casper().options({ output: 'latex' }).go(input)
+            output = katex.renderToString(result, { displayMode: true })
+        } catch (error) {}
+    }
 </script>
 
 <div class="container mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
@@ -42,6 +50,7 @@
     </button>
 
     <button
+        on:click={go}
         class="flex items-center p-6 space-x-1 text-lg shadow-lg bg-gray-200 hover:bg-gray-300 hover:border-gray-300 focus:border-gray-300 transition focus:outline-none focus:bg-gray-300 focus:shadow-lg rounded-r-md border border-gray-200 group"
     >
         <span>Go!</span>
@@ -64,6 +73,13 @@
         <div class="flex container text-lg items-center space-x-3">
             <p><strong>Your Input:</strong></p>
             <div>{@html preview}</div>
+        </div>
+    {/if}
+
+    {#if output !== ''}
+        <div class="flex container text-lg items-center space-x-3">
+            <p><strong>Output:</strong></p>
+            <div>{@html output}</div>
         </div>
     {/if}
 
