@@ -17,6 +17,11 @@
             output = katex.renderToString(result, { displayMode: true })
         } catch (error) {}
     }
+
+    function show(text: string) {
+        input = text
+        go()
+    }
 </script>
 
 <div class="container mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
@@ -86,13 +91,16 @@
     <div class="container mt-12">
         <h2 class="font-bold text-center mb-10 text-4xl">Try an example</h2>
         <ul class="grid grid-cols-3 gap-6">
-            {#each ['2 \\cdot x', '3 + 3', '2 \\cdot x + 4 \\cdot x', '3 + 3', '2 \\cdot x + 4 \\cdot x', '2 \\cdot x'] as example}
+            {#each ['2 * x', '3 + 3', '2 * x + 4 * x', '3 + 3', '2 * x + 4 * x', 'sin(2 * 3 * pi)'] as example}
                 <li>
                     <button
+                        on:click={() => show(example)}
                         class="flex px-10 group justify-between text-lg items-center bg-white shadow-lg hover:shadow-sm transition border border-gray-300 w-full rounded-md py-6"
                     >
                         <span />
-                        <span>{@html katex.renderToString(example)}</span>
+                        <span>
+                            {@html katex.renderToString(casper().options({ actions: [], output: 'latex' }).go(example))}
+                        </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
