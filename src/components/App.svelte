@@ -59,11 +59,41 @@
     </button>
 </div>
 
-<div class="bg-gradient-to-b pt-16 from-gray-200 to-white min-h-[300px]">
+<div class="bg-gradient-to-b min-h-screen pt-16 from-gray-200 to-white">
     {#if preview !== '' && input !== ''}
-        <div class="flex container items-center space-x-3">
-            <p class="text-lg"><strong>Your Input:</strong></p>
-            <div class="text-xl">{@html preview}</div>
+        <div class="flex container text-lg items-center space-x-3">
+            <p><strong>Your Input:</strong></p>
+            <div>{@html preview}</div>
         </div>
     {/if}
+
+    <div class="container mt-12">
+        <h2 class="font-bold text-center mb-10 text-4xl">Try an example</h2>
+        <ul class="grid grid-cols-3 gap-6">
+            {#each ['2 \\cdot x', '3 + 3', '2 \\cdot x + 4 \\cdot x', '3 + 3', '2 \\cdot x + 4 \\cdot x', '2 \\cdot x'] as example}
+                <li>
+                    <button
+                        class="flex px-10 group justify-between text-lg items-center bg-white shadow-lg hover:shadow-sm transition border border-gray-300 w-full rounded-md py-6"
+                    >
+                        <span />
+                        <span>{@html katex.renderToString(example)}</span>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 h-6 text-gray-500 duration-300 group-hover:text-black transition translate-x-0 group-hover:translate-x-4"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                            />
+                        </svg>
+                    </button>
+                </li>
+            {/each}
+        </ul>
+    </div>
 </div>
