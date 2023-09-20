@@ -11,7 +11,7 @@
     } catch (error) {}
 </script>
 
-<div class="max-w-screen-lg mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
+<div class="container mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
@@ -61,7 +61,7 @@
 
 <div class="bg-gradient-to-b pt-16 from-gray-200 to-white min-h-[300px]">
     {#if preview !== '' && input !== ''}
-        <div class="flex max-w-screen-lg mx-auto items-center space-x-3">
+        <div class="flex container items-center space-x-3">
             <p class="text-lg"><strong>Your Input:</strong></p>
             <div class="text-xl">{@html preview}</div>
         </div>

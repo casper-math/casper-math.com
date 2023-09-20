@@ -45,3 +45,7 @@
 .katex-html {
     text-align: left;
 }
+
+.container {
+    @apply max-w-screen-lg mx-auto;
+}
