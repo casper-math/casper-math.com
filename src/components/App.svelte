@@ -97,7 +97,7 @@
                 <li>
                     <button
                         on:click={() => show(example)}
-                        class="flex px-10 group justify-between text-lg items-center bg-white shadow-lg hover:shadow-sm transition border border-gray-300 w-full rounded-md py-6"
+                        class=" hover:scale-105 flex px-10 group justify-between text-lg items-center bg-white shadow-md hover:shadow-lg transition border border-gray-300 w-full rounded-md py-6"
                     >
                         <span />
                         <span>
@@ -109,7 +109,7 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="w-6 h-6 text-gray-500 duration-300 group-hover:text-black transition translate-x-0 group-hover:translate-x-4"
+                            class="w-6 h-6 text-gray-500 duration-300 transition translate-x-0"
                         >
                             <path
                                 stroke-linecap="round"
@@ -138,13 +138,15 @@
                 </a>
             </div>
             <div class="col-span-1 p-6 bg-blue-900 text-lg rounded-md shadow-md">
-                <code>
-                    <span class="text-red-300">import</span> casper <span class="text-red-300">from</span>
-                    <span class="text-blue-200">'casper-math'</span><br /><br />
-                    <span class="text-fuchsia-300">casper</span>().<span class="text-fuchsia-300">go</span>(<span
-                        class="text-blue-200">'2*x + 4*x'</span
-                    >) <span class="text-slate-400">// 6*x</span><br /><br />
-                </code>
+                <pre
+                    ><span class="text-red-300">import</span> casper <span class="text-red-300">from</span> <span
+                        class="text-blue-200">'casper-math'</span
+                    ><br /><br /><span class="text-fuchsia-300">casper</span>()<br />    .<span
+                        class="span text-fuchsia-300">options</span
+                    >(&lbrace; output: '<span class="text-blue-200">string</span>'  &rbrace;)<br />    .<span
+                        class="text-fuchsia-300">go</span
+                    >(<span class="text-blue-200">'2*x + 4*x'</span>) <span class="text-slate-400">// 6 * x</span>
+                </pre>
             </div>
         </div>
     </div>
