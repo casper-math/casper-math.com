@@ -28,10 +28,11 @@
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
+        on:keydown={() => (output = '')}
         type="text"
         autofocus
         placeholder="Type an expression..."
-        class="px-8 py-6 text-lg w-full focus:outline-none rounded-l-md shadow-lg border border-gray-200"
+        class="w-full px-8 py-6 text-lg border border-gray-200 shadow-lg focus:outline-none rounded-l-md"
         class:font-mono={input !== ''}
         class:tracking-wide={input === ''}
     />
@@ -56,7 +57,7 @@
 
     <button
         on:click={go}
-        class="flex items-center p-6 space-x-1 text-lg shadow-lg bg-gray-200 hover:bg-gray-300 hover:border-gray-300 focus:border-gray-300 transition focus:outline-none focus:bg-gray-300 focus:shadow-lg rounded-r-md border border-gray-200 group"
+        class="flex items-center p-6 space-x-1 text-lg transition bg-gray-200 border border-gray-200 shadow-lg hover:bg-gray-300 hover:border-gray-300 focus:border-gray-300 focus:outline-none focus:bg-gray-300 focus:shadow-lg rounded-r-md group"
     >
         <span>Go!</span>
 
@@ -73,17 +74,17 @@
     </button>
 </div>
 
-<div class="bg-gradient-to-b space-y-24 mb-24 pt-16 from-gray-200 to-white">
+<div class="pt-16 mb-24 space-y-24 bg-gradient-to-b from-gray-200 to-white">
     <div>
         {#if preview !== '' && input !== ''}
-            <div class="flex container text-lg items-center space-x-3">
+            <div class="container flex items-center space-x-3 text-lg">
                 <p><strong>Your Input:</strong></p>
                 <div>{@html preview}</div>
             </div>
         {/if}
 
         {#if output !== ''}
-            <div class="flex container text-lg items-center space-x-3">
+            <div class="container flex items-center space-x-3 text-lg">
                 <p><strong>Output:</strong></p>
                 <div>{@html output}</div>
             </div>
@@ -91,13 +92,13 @@
     </div>
 
     <div class="container mt-12">
-        <h2 class="font-bold text-center mb-10 text-4xl">Try an example</h2>
+        <h2 class="mb-10 text-4xl font-bold text-center">Try an example</h2>
         <ul class="grid grid-cols-3 gap-6">
             {#each ['2 * x', '3 + 3', '2 * x + 4 * x', '3 + 3', '2 * x + 4 * x', 'sin(2 * 3 * pi)'] as example}
                 <li>
                     <button
                         on:click={() => show(example)}
-                        class=" hover:scale-105 flex px-10 group justify-between text-lg items-center bg-white shadow-md hover:shadow-lg transition border border-gray-300 w-full rounded-md py-6"
+                        class="flex items-center justify-between w-full px-10 py-6 text-lg transition duration-100 bg-white border border-gray-300 rounded-md shadow-md hover:scale-105 group hover:shadow-lg"
                     >
                         <span />
                         <span>
@@ -109,7 +110,7 @@
                             viewBox="0 0 24 24"
                             stroke-width="1.5"
                             stroke="currentColor"
-                            class="w-6 h-6 text-gray-500 duration-300 transition translate-x-0"
+                            class="w-6 h-6 text-gray-500"
                         >
                             <path
                                 stroke-linecap="round"
@@ -125,19 +126,19 @@
 
     <div class="container">
         <div
-            class="bg-gradient-to-tr from-blue-600 to-blue-500 grid grid-cols-2 p-6 gap-12 rounded-md shadow-xl text-white"
+            class="grid grid-cols-2 gap-12 p-6 text-white rounded-md shadow-xl bg-gradient-to-tr from-blue-600 to-blue-500"
         >
             <div class="col-span-1 p-6">
-                <h3 class=" font-bold text-3xl mb-4">Use Casper in your project</h3>
+                <h3 class="mb-4 text-3xl font-bold">Use Casper in your project</h3>
                 <p class="mb-6">Capser is an NPM package that you can use and configure to meet your needs.</p>
                 <a
                     href="https://www.npmjs.com/package/casper-math"
-                    class="inline-block hover:shadow-xl transition hover:scale-110 px-6 py-3 bg-white text-blue-600 rounded-md shadow-md"
+                    class="inline-block px-6 py-3 text-blue-600 transition bg-white rounded-md shadow-md hover:shadow-xl hover:scale-110"
                 >
                     Check it out
                 </a>
             </div>
-            <div class="col-span-1 p-6 bg-blue-900 text-lg rounded-md shadow-md">
+            <div class="col-span-1 p-6 text-lg bg-blue-900 rounded-md shadow-md">
                 <pre
                     ><span class="text-red-300">import</span> casper <span class="text-red-300">from</span> <span
                         class="text-blue-200">'casper-math'</span
