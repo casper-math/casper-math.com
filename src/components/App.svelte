@@ -8,13 +8,13 @@
 
     $: try {
         let result = casper().options({ output: 'latex', actions: [] }).go(input)
-        preview = katex.renderToString(result, { displayMode: true })
+        preview = katex.renderToString(result.result, { displayMode: true })
     } catch (error) {}
 
     function go() {
         try {
             let result = casper().options({ output: 'latex' }).go(input)
-            output = katex.renderToString(result, { displayMode: true })
+            output = katex.renderToString(result.result, { displayMode: true })
         } catch (error) {}
     }
 
@@ -102,7 +102,9 @@
                     >
                         <span />
                         <span>
-                            {@html katex.renderToString(casper().options({ actions: [], output: 'latex' }).go(example))}
+                            {@html katex.renderToString(
+                                casper().options({ actions: [], output: 'latex' }).go(example).result
+                            )}
                         </span>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
