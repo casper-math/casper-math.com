@@ -24,7 +24,7 @@
     }
 </script>
 
-<div class="container mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
+<div class="container lg:mx-0 mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
@@ -32,12 +32,14 @@
         type="text"
         autofocus
         placeholder="Type an expression..."
-        class="w-full px-8 py-6 text-lg border border-gray-200 shadow-lg focus:outline-none rounded-l-md"
+        class="w-full px-8 py-6 text-lg border border-gray-200 shadow-lg md:text-base md:px-6 sm:px-4 md:py-4 sm:py-3 focus:outline-none rounded-l-md"
         class:font-mono={input !== ''}
         class:tracking-wide={input === ''}
     />
 
-    <button class="absolute right-[140px] text-gray-600 hover:text-gray-900 hover:rotate-45 transition duration-300">
+    <button
+        class="absolute right-[140px] sm:right-[120px] text-gray-600 hover:text-gray-900 hover:rotate-45 transition duration-300"
+    >
         <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -57,7 +59,7 @@
 
     <button
         on:click={go}
-        class="flex items-center p-6 space-x-1 text-lg transition bg-gray-200 border border-gray-200 shadow-lg hover:bg-gray-300 hover:border-gray-300 focus:border-gray-300 focus:outline-none focus:bg-gray-300 focus:shadow-lg rounded-r-md group"
+        class="flex items-center p-6 space-x-1 text-lg transition bg-gray-200 border border-gray-200 shadow-lg md:text-base md:px-6 sm:px-4 md:py-4 sm:py-3 hover:bg-gray-300 hover:border-gray-300 focus:border-gray-300 focus:outline-none focus:bg-gray-300 focus:shadow-lg rounded-r-md group"
     >
         <span>Go!</span>
 
@@ -74,17 +76,17 @@
     </button>
 </div>
 
-<div class="pt-16 mb-24 space-y-24 bg-gradient-to-b from-gray-200 to-white">
+<div class="pt-16 mb-24 space-y-24 md:mb-16 sm:mb-8 md:space-y-16 sm:space-y-8 bg-gradient-to-b from-gray-200 to-white">
     <div>
         {#if preview !== '' && input !== ''}
-            <div class="container flex items-center space-x-3 text-lg">
+            <div class="container flex items-center space-x-3 text-lg md:text-base">
                 <p><strong>Your Input:</strong></p>
                 <div>{@html preview}</div>
             </div>
         {/if}
 
         {#if output !== ''}
-            <div class="container flex items-center space-x-3 text-lg">
+            <div class="container flex items-center space-x-3 text-lg md:text-base">
                 <p><strong>Output:</strong></p>
                 <div>{@html output}</div>
             </div>
@@ -92,15 +94,18 @@
     </div>
 
     <div class="container mt-12">
-        <h2 class="mb-10 text-4xl font-bold text-center">Try an example</h2>
-        <ul class="grid grid-cols-3 gap-6">
+        <h2 class="mb-10 text-4xl font-bold text-center md:text-3xl md:text-left md:mb-8 sm:mb-6 sm:text-2xl">
+            Try an example
+        </h2>
+
+        <ul class="grid grid-cols-3 gap-6 md:grid-cols-2 sm:grid-cols-1 md:gap-4">
             {#each ['2 * x', '3 + 3', '2 * x + 4 * x', '3 + 3', '2 * x + 4 * x', 'sin(2 * 3 * pi)'] as example}
                 <li>
                     <button
                         on:click={() => show(example)}
-                        class="flex items-center justify-between w-full px-10 py-6 text-lg transition duration-100 bg-white border border-gray-300 rounded-md shadow-md hover:scale-105 group hover:shadow-lg"
+                        class="flex items-center justify-between w-full px-10 py-6 text-lg transition duration-100 bg-white border border-gray-300 rounded-md shadow-md md:px-8 md:py-4 md:text-base hover:scale-105 group hover:shadow-lg"
                     >
-                        <span />
+                        <span class="md:hidden" />
                         <span>
                             {@html katex.renderToString(
                                 casper().options({ actions: [], output: 'latex' }).go(example).result
@@ -128,19 +133,19 @@
 
     <div class="container">
         <div
-            class="grid grid-cols-2 gap-12 p-6 text-white rounded-md shadow-xl bg-gradient-to-tr from-blue-600 to-blue-500"
+            class="grid grid-cols-2 gap-12 p-6 text-white rounded-md shadow-xl md:grid-cols-1 md:gap-6 bg-gradient-to-tr from-blue-600 to-blue-500"
         >
-            <div class="col-span-1 p-6">
-                <h3 class="mb-4 text-3xl font-bold">Use Casper in your project</h3>
+            <div class="col-span-1 p-6 pr-0 md:p-0">
+                <h3 class="mb-4 text-3xl font-bold md:text-2xl">Use Casper in your project</h3>
                 <p class="mb-6">Capser is an NPM package that you can use and configure to meet your needs.</p>
                 <a
                     href="https://www.npmjs.com/package/casper-math"
-                    class="inline-block px-6 py-3 text-blue-600 transition bg-white rounded-md shadow-md hover:shadow-xl hover:scale-110"
+                    class="inline-block px-6 py-3 text-blue-600 transition bg-white rounded-md shadow-md md:px-4 md:py-2 hover:shadow-xl hover:scale-110"
                 >
                     Check it out
                 </a>
             </div>
-            <div class="col-span-1 p-6 text-lg bg-blue-900 rounded-md shadow-md">
+            <div class="col-span-1 p-6 overflow-x-auto text-lg bg-blue-900 rounded-md shadow-md md:p-4 md:text-base">
                 <pre
                     ><span class="text-red-300">import</span> casper <span class="text-red-300">from</span> <span
                         class="text-blue-200">'casper-math'</span
@@ -148,8 +153,8 @@
                         class="span text-fuchsia-300">options</span
                     >(&lbrace; output: '<span class="text-blue-200">string</span>'  &rbrace;)<br />    .<span
                         class="text-fuchsia-300">go</span
-                    >(<span class="text-blue-200">'2*x + 4*x'</span>) <span class="text-slate-400">// 6 * x</span>
-                </pre>
+                    >(<span class="text-blue-200">'2*x + 4*x'</span>) <span class="text-slate-400">// 6 * x</span></pre
+                >
             </div>
         </div>
     </div>
