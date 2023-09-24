@@ -38,7 +38,7 @@
     />
 
     <button
-        class="absolute right-[140px] sm:right-[120px] text-gray-600 hover:text-gray-900 hover:rotate-45 transition duration-300"
+        class="absolute right-[calc(108px+8*4px+6*4px)] md:right-[calc(88px+6*4px+6*4px)] sm:right-[calc(88px+4*4px+6*4px)] text-gray-600 hover:text-gray-900 hover:rotate-45 transition duration-300"
     >
         <svg
             xmlns="http://www.w3.org/2000/svg"
