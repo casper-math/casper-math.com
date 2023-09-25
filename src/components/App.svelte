@@ -153,7 +153,9 @@
                         class="span text-fuchsia-300">options</span
                     >(&lbrace; output: '<span class="text-blue-200">string</span>'  &rbrace;)<br />    .<span
                         class="text-fuchsia-300">go</span
-                    >(<span class="text-blue-200">'2*x + 4*x'</span>) <span class="text-slate-400">// 6 * x</span></pre
+                    >(<span class="text-blue-200">'2*x + 4*x'</span>)<br />    .<span class="span text-fuchsia-300"
+                        >result</span
+                    > <span class="text-slate-400">// 6 * x</span></pre
                 >
             </div>
         </div>
