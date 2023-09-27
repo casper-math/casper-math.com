@@ -46,6 +46,10 @@
     text-align: left;
 }
 
+.katex-display {
+    margin: 0;
+}
+
 .container {
     @apply max-w-5xl mx-auto px-6;
 }

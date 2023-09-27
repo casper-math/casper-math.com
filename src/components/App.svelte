@@ -1,10 +1,13 @@
 <script lang="ts">
     import casper from 'casper-math'
+    import type { Step } from 'casper-math/dist/interfaces'
     import katex from 'katex'
+    import ShowStep from './ShowStep.svelte'
 
     let input: string = '(2 + 3) / (4 * 5)'
     let preview: string = ''
     let output: string = ''
+    let steps: Step[] = []
 
     $: try {
         let result = casper().options({ output: 'latex', actions: [] }).go(input)
@@ -15,6 +18,7 @@
         try {
             let result = casper().options({ output: 'latex' }).go(input)
             output = katex.renderToString(result.result, { displayMode: true })
+            steps = result.steps
         } catch (error) {}
     }
 
@@ -22,13 +26,15 @@
         input = text
         go()
     }
+
+    go()
 </script>
 
 <div class="container lg:mx-0 mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
-        on:keydown={() => (output = '')}
+        on:input={() => (output = '')}
         type="text"
         autofocus
         placeholder="Type an expression..."
@@ -90,6 +96,12 @@
                 <p><strong>Output:</strong></p>
                 <div>{@html output}</div>
             </div>
+
+            <ol class="container space-y-4">
+                {#each steps as step}
+                    <ShowStep {step} />
+                {/each}
+            </ol>
         {/if}
     </div>
 
