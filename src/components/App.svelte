@@ -1,13 +1,13 @@
 <script lang="ts">
     import casper from 'casper-math'
-    import type { Step } from 'casper-math/dist/interfaces'
+    import type { Result } from 'casper-math/dist/interfaces'
     import katex from 'katex'
+    import { fly } from 'svelte/transition'
     import ShowStep from './ShowStep.svelte'
 
     let input: string = '(2 + 3) / (4 * 5)'
     let preview: string = ''
-    let output: string = ''
-    let steps: Step[] = []
+    let result: Result = { result: '', steps: [] }
 
     $: try {
         let result = casper().options({ output: 'latex', actions: [] }).go(input)
@@ -16,9 +16,7 @@
 
     function go() {
         try {
-            let result = casper().options({ output: 'latex' }).go(input)
-            output = katex.renderToString(result.result, { displayMode: true })
-            steps = result.steps
+            result = casper().options({ output: 'latex' }).go(input)
         } catch (error) {}
     }
 
@@ -26,15 +24,13 @@
         input = text
         go()
     }
-
-    go()
 </script>
 
 <div class="container lg:mx-0 mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
-        on:input={() => (output = '')}
+        on:input={() => (result.result = '')}
         type="text"
         autofocus
         placeholder="Type an expression..."
@@ -85,21 +81,41 @@
 <div class="pt-16 mb-24 space-y-24 md:mb-16 sm:mb-8 md:space-y-16 sm:space-y-8 bg-gradient-to-b from-gray-200 to-white">
     <div>
         {#if preview !== '' && input !== ''}
-            <div class="container flex items-center space-x-3 text-lg md:text-base">
+            <div class="container flex mb-10 items-center space-x-3 text-lg md:text-base">
                 <p><strong>Your Input:</strong></p>
                 <div>{@html preview}</div>
             </div>
         {/if}
 
-        {#if output !== ''}
-            <div class="container flex items-center space-x-3 text-lg md:text-base">
-                <p><strong>Output:</strong></p>
-                <div>{@html output}</div>
+        {#if result.result !== ''}
+            <div class="container">
+                <div
+                    transition:fly={{ y: 50, duration: 500 }}
+                    class="w-full text-left bg-white p-6 rounded-md shadow-md"
+                >
+                    <h3 class="text-blue-600 mb-2 font-bold capitalize"> Result </h3>
+
+                    <div>{@html katex.renderToString(result.result, { displayMode: true })}</div>
+                </div>
             </div>
 
+            {#if result.steps.length > 0}
+                <div class="container">
+                    <h2
+                        transition:fly|global={{ y: 50, duration: 500, delay: 100 }}
+                        class="text-lg font-bold mb-6 mt-10">Steps ({result.steps.length})</h2
+                    >
+                </div>
+            {/if}
+
             <ol class="container space-y-4">
-                {#each steps as step}
-                    <ShowStep {step} />
+                {#each result.steps as step, key}
+                    <li
+                        in:fly|global={{ y: 50, delay: key * 100 + 200, duration: 500 }}
+                        out:fly|global={{ y: 50, duration: 300 }}
+                    >
+                        <ShowStep {step} />
+                    </li>
                 {/each}
             </ol>
         {/if}
