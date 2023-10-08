@@ -51,5 +51,5 @@
 }
 
 .container {
-    @apply max-w-5xl mx-auto px-6;
+    @apply max-w-5xl mx-[calc((100vw-1024px)/2)] px-6 lg:mx-auto;
 }

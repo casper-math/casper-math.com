@@ -27,7 +27,7 @@
     }
 </script>
 
-<div class="container lg:mx-0 mx-[calc((100vw-1024px)/2)] w-full flex items-center absolute -translate-y-1/2">
+<div class="container absolute flex items-center w-full -translate-y-1/2 lg:mx-0">
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
@@ -82,7 +82,7 @@
 <div class="pt-16 mb-24 space-y-24 md:mb-16 sm:mb-8 md:space-y-16 sm:space-y-8 bg-gradient-to-b from-gray-200 to-white">
     <div>
         {#if preview !== '' && input !== ''}
-            <div class="container flex mb-10 items-center space-x-3 text-lg md:text-base">
+            <div class="container flex items-center mb-10 space-x-3 text-lg md:text-base">
                 <p><strong>Your Input:</strong></p>
                 <div>{@html preview}</div>
             </div>
@@ -92,9 +92,9 @@
             <div class="container">
                 <div
                     transition:fly={{ y: 50, duration: 500 }}
-                    class="w-full text-left bg-white p-6 rounded-md shadow-md"
+                    class="w-full p-6 text-left bg-white rounded-md shadow-md"
                 >
-                    <h3 class="text-blue-600 mb-2 font-bold capitalize"> Result </h3>
+                    <h3 class="mb-2 font-bold text-blue-600 capitalize"> Result </h3>
 
                     <div>{@html katex.renderToString(result.result, { displayMode: true })}</div>
                 </div>
@@ -104,7 +104,7 @@
                 <div class="container">
                     <h2
                         transition:fly|global={{ y: 50, duration: 500, delay: 100 }}
-                        class="text-lg font-bold mb-6 mt-10">Steps ({result.steps.length})</h2
+                        class="mt-10 mb-6 text-lg font-bold">Steps ({result.steps.length})</h2
                     >
                 </div>
             {/if}
