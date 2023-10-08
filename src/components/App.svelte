@@ -20,9 +20,10 @@
         } catch (error) {}
     }
 
-    function show(text: string) {
+    function showExample(text: string) {
         input = text
         go()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 </script>
 
@@ -130,7 +131,7 @@
             {#each ['2 * x', '3 + 3', '2 * x + 4 * x', '3 + 3', '2 * x + 4 * x', 'sin(2 * 3 * pi)'] as example}
                 <li>
                     <button
-                        on:click={() => show(example)}
+                        on:click={() => showExample(example)}
                         class="flex items-center justify-between w-full px-10 py-6 text-lg transition duration-100 bg-white border border-gray-300 rounded-md shadow-md md:px-8 md:py-4 md:text-base hover:scale-105 group hover:shadow-lg"
                     >
                         <span class="md:hidden" />
