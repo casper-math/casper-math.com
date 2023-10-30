@@ -1,10 +1,24 @@
 <script lang="ts">
     import type { Step } from 'casper-math/dist/interfaces'
     import katex from 'katex'
+    import { onMount } from 'svelte'
     import { fade } from 'svelte/transition'
 
     export let step: Step
     let expanded: boolean = false
+
+    let description: string
+
+    onMount(() => {
+        description = step.description
+
+        const matches = step.description.match(/\$([^$]+)\$/g)
+
+        matches?.forEach(match => {
+            const latex = katex.renderToString(match.replaceAll('$', ''))
+            description = description.replace(match, latex)
+        })
+    })
 </script>
 
 <button class="w-full text-left bg-white p-6 rounded-md shadow-md" on:click={() => (expanded = !expanded)}>
@@ -31,11 +45,7 @@
 
     {#if expanded}
         <div in:fade class="flex mb-3 items-center space-x-1">
-            <span>Replace</span>
-            <span>{@html katex.renderToString(step.search, { displayMode: true })}</span>
-            <span>by</span>
-            <span>{@html katex.renderToString(step.replace, { displayMode: true })}</span>
-            <span>.</span>
+            {@html description}
         </div>
     {/if}
 
