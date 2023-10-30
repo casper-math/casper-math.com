@@ -5,7 +5,7 @@
     import { fly } from 'svelte/transition'
     import ShowStep from './ShowStep.svelte'
 
-    let input: string = '(2 + 3) / (4 * 5)'
+    let input: string = ''
     let preview: string = ''
     let result: Result = { result: '', steps: [] }
 
