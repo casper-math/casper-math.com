@@ -18,16 +18,20 @@
         try {
             result = casper().options({ output: 'latex' }).go(input)
         } catch (error) {}
+        document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })
     }
 
     function showExample(text: string) {
         input = text
         go()
-        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 </script>
 
-<div class="container absolute flex items-center w-full -translate-y-1/2 lg:mx-0">
+<form
+    on:submit|preventDefault={go}
+    id="form"
+    class="container absolute flex items-center w-full -translate-y-1/2 lg:mx-0"
+>
     <!-- svelte-ignore a11y-autofocus -->
     <input
         bind:value={input}
@@ -41,6 +45,7 @@
     />
 
     <button
+        type="button"
         class="absolute right-[calc(108px+8*4px+6*4px)] md:right-[calc(88px+6*4px+6*4px)] sm:right-[calc(88px+4*4px+6*4px)] text-gray-600 hover:text-gray-900 hover:rotate-45 transition duration-300"
     >
         <svg
@@ -61,7 +66,7 @@
     </button>
 
     <button
-        on:click={go}
+        type="submit"
         class="flex items-center p-6 space-x-1 text-lg transition bg-gray-200 border border-gray-200 shadow-lg md:text-base md:px-6 sm:px-4 md:py-4 sm:py-3 hover:bg-gray-300 hover:border-gray-300 focus:border-gray-300 focus:outline-none focus:bg-gray-300 focus:shadow-lg rounded-r-md group"
     >
         <span>Go!</span>
@@ -77,7 +82,7 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
         </svg>
     </button>
-</div>
+</form>
 
 <div class="pt-16 mb-24 space-y-24 md:mb-16 sm:mb-8 md:space-y-16 sm:space-y-8 bg-gradient-to-b from-gray-200 to-white">
     <div>
