@@ -2,6 +2,7 @@
     import casper from 'casper-math'
     import type { Result } from 'casper-math/dist/interfaces'
     import katex from 'katex'
+    import { onMount } from 'svelte'
     import { fly } from 'svelte/transition'
     import ShowStep from './ShowStep.svelte'
 
@@ -18,13 +19,21 @@
         try {
             result = casper().options({ output: 'latex' }).go(input)
         } catch (error) {}
+
         document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })
+        window.history.pushState({}, '', `?input=${input}`)
     }
 
     function showExample(text: string) {
         input = text
         go()
     }
+
+    onMount(() => {
+        const urlParams = new URLSearchParams(window.location.search)
+        const query = urlParams.get('input')
+        if (query) input = query
+    })
 </script>
 
 <form
