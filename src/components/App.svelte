@@ -21,7 +21,7 @@
         } catch (error) {}
 
         document.getElementById('form')?.scrollIntoView({ behavior: 'smooth' })
-        window.history.pushState({}, '', `?input=${input}`)
+        window.history.pushState({}, '', `?input=${encodeURIComponent(input)}`)
     }
 
     function showExample(text: string) {
