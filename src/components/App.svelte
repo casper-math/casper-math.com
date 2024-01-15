@@ -142,7 +142,7 @@
         </h2>
 
         <ul class="grid grid-cols-3 gap-6 md:grid-cols-2 sm:grid-cols-1 md:gap-4">
-            {#each ['3^2 + 4 * 5 - 1', '3x + 6x - 4x', '6x^3 + 2x * 3x^2'] as example}
+            {#each ['3^2 + 4 * 5 - 1', '3x + 6x - 4x', '6x^3 + 2x * 3x^2', '2x * (x + 3)', '(x + y)^3', '(2x + 1)(3x + 4)'] as example}
                 <li>
                     <button
                         on:click={() => showExample(example)}
